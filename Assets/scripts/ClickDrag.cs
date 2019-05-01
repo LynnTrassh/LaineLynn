@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClickDrag : MonoBehaviour
 {
-
+    
     private Vector3 click;
     // Start is called before the first frame update
     void Start()
