@@ -20,6 +20,6 @@ public class ClickZoom : MonoBehaviour
 
     void OnMouseDown()
     {
-        Camera.transform.position = new Vector3(transform.position.x, transform.position.y, (transform.position.z + 20));
+        Camera.transform.position = new Vector3(0, 0, (transform.position.z + 20));
     }
 }
