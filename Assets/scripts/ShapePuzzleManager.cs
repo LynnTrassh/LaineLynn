@@ -12,6 +12,7 @@ public class ShapePuzzleManager : MonoBehaviour
 
     public Tile lastDraggedTile;
     public float thresholdDistance;
+    
 
     
 
@@ -67,6 +68,8 @@ public class ShapePuzzleManager : MonoBehaviour
         if(gridNode.answerNumber == 1 && lastDraggedTile.number == 1)
         {
             settled[0] = true;
+            
+
         }
         else if (gridNode.answerNumber == 2 && lastDraggedTile.number == 2)
         {
