@@ -8,8 +8,11 @@ namespace Knight
         public int Index;
         public int Value;
 
-      
-        
+        public AudioSource audioscource;
+        public AudioClip click;
+
+
+
 
         // Start is called before the first frame update
         void Start()
@@ -31,6 +34,7 @@ namespace Knight
           
             Debug.Log("click");
             PuzzleControl.Main.ChangeNumber(Index, Value);
+            audioscource.PlayOneShot(click);
             
 
         }

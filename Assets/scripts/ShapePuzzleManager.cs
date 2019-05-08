@@ -12,7 +12,10 @@ public class ShapePuzzleManager : MonoBehaviour
 
     public Tile lastDraggedTile;
     public float thresholdDistance;
-    
+
+
+    public AudioSource audiosource;
+    public AudioClip puzzleSound;
 
     
 
@@ -33,6 +36,8 @@ public class ShapePuzzleManager : MonoBehaviour
         {
             Debug.Log("Win!!");
         }
+
+        
     }
 
     public void CheckTileDistances()
@@ -53,6 +58,7 @@ public class ShapePuzzleManager : MonoBehaviour
     void SnapToGridPoint (GridNode gridNode)
     {
         lastDraggedTile.transform.position = gridNode.transform.position;
+        audiosource.PlayOneShot(puzzleSound);
         //gridNode.tileOnNode = lastDraggedTile;
         ////for (int i =  0; i < gridNodes.Length; i++)
         /*if(gridNode.answerNumber == lastDraggedTile.number)

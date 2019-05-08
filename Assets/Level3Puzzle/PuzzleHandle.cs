@@ -9,6 +9,11 @@ namespace Knight
         public bool NumberCorrect;
         int score;
 
+        public AudioSource audiosource;
+        
+        public AudioClip locked;
+        public AudioClip open;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -25,9 +30,17 @@ namespace Knight
 
         public void OnMouseDown()
         {
-            if(PuzzleControl.Main.NumberCorrect == true)
+            if (PuzzleControl.Main.NumberCorrect == false)
+            {
+                Debug.Log("Locked");
+                audiosource.PlayOneShot(locked);
+
+            }
+            else if(PuzzleControl.Main.NumberCorrect == true)
             {
                 Debug.Log("Open");
+                audiosource.PlayOneShot(open);
+
             }
         }
        
