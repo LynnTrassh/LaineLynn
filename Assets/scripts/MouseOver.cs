@@ -20,6 +20,8 @@ public class MouseOver : MonoBehaviour
     public bool Note;
     public bool Clock;
     public bool Wine;
+    public GameObject notesprite;
+    public bool NoteSprite;
 
 
     //changes made
@@ -71,7 +73,19 @@ public class MouseOver : MonoBehaviour
 
     public bool safeunclocked;
     public bool diaryopen;
-    
+
+    //wall 4
+    public bool papers;
+    public GameObject candle1;
+    public GameObject candle2;
+    public bool candle1flaming = false;
+    public bool candle2flaming = false;
+    public GameObject wall4;
+    public GameObject[] darkfilters;
+    public GameObject clocksprite;
+    public GameObject PaperOnDesk;
+
+
 
 
 
@@ -101,40 +115,70 @@ public class MouseOver : MonoBehaviour
             }
             
         }
+
+        if(papers)
+        {
+            if (candle1.GetComponent<SpriteRenderer>().enabled == true)
+            {
+                candle1flaming = true;
+            }
+            if (candle2.GetComponent<SpriteRenderer>().enabled == true)
+            {
+                candle2flaming = true;
+            }
+
+            if (candle1flaming == true && candle2flaming == true)
+            {
+                darkfilters[0].SetActive(false);
+                darkfilters[1].SetActive(false);
+                darkfilters[2].SetActive(false);
+                darkfilters[3].SetActive(false);
+                clocksprite.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+        }
+        
     }
 
     public void OnMouseOver()
     {
-        FlavorText.SetActive(true);
+        
 
         
 
         if (PictureOnWall)
         {
             Text.text = "What a lovely couple.";
+            FlavorText.SetActive(true);
         }
 
         if(Note)
         {
-            Text.text = "'Hey hon, I should be home at 9:00. - Love, Julie.'";
+            FlavorText.SetActive(true);
+            Text.text = "Someone left a note";
+            notesprite.SetActive(true);
+            
         }
         
 
         if (Clock)
         {
             Text.text = "The clock is not functioning.";
+            FlavorText.SetActive(true);
         }
         if (Wine && !glassfull)
         {
             Text.text = "Empty vase.";
+            FlavorText.SetActive(true);
         }
         else if(Wine && glassfull && !glasswithflower)
         {
             Text.text = "Vase is filled up with water.";
+            FlavorText.SetActive(true);
         }
         else if(Wine && glassfull && glasswithflower)
         {
             Text.text = "Flower is flourishing in the water";
+            FlavorText.SetActive(true);
         }
 
         // Wall 2
@@ -201,6 +245,29 @@ public class MouseOver : MonoBehaviour
             Text.text = "";
         }
 
+        if(papers)
+        {
+            if(candle1flaming && candle2flaming)
+            {
+                FlavorText.SetActive(false);
+                Text.text = "";
+            }
+            else
+            {
+                FlavorText.SetActive(true);
+                Text.text = "Need more light to read";
+            }
+            
+        }
+        if (notesprite)
+        {
+            FlavorText.SetActive(false);
+            Text.text = "";
+            
+        }
+
+
+
     }
 
     public void OnMouseExit()
@@ -215,6 +282,22 @@ public class MouseOver : MonoBehaviour
         {
             FlavorText.SetActive(false);
             Text.text = "";
+        }
+
+        /*if(Note)
+        {
+            FlavorText.SetActive(false);
+            Text.text = "";
+            notesprite.SetActive(true);
+            Debug.Log("working");
+
+        }
+        */
+        if(notesprite)
+        {
+            FlavorText.SetActive(false);
+            Text.text = "";
+            notesprite.SetActive(false);
         }
 
         if(ShapePuzzleEnterIcon)
@@ -250,6 +333,7 @@ public class MouseOver : MonoBehaviour
                 {
 
                     radiosound.PlayOneShot(radionews,3.5f);
+                gameManager.GetComponent<gameManager>().radiocomplete = true;
                     
                 }
 
@@ -310,6 +394,16 @@ public class MouseOver : MonoBehaviour
             }
             
             
+        }
+
+        if(papers)
+        {
+            if(candle1flaming && candle2flaming)
+            {
+                wall4.SetActive(false);
+                PaperOnDesk.SetActive(true);
+                
+            }
         }
         
         

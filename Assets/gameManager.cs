@@ -8,13 +8,17 @@ public class gameManager : MonoBehaviour
     public GameObject[] UIs;
     public GameObject[] puzzles;
     public GameObject[] puzzlesUIs;
+    public GameObject[] switchbuttons;
     public GameObject FlaverText;
 
     public GameObject[] sounds;
 
-    public bool Wall1Complete;
-    public bool Wall2Complete;
-    public bool Wall3Complete;
+    public bool flowercomplete = false;
+    public bool clockcomplete = false;
+    public bool radiocomplete = false;
+    public bool diarycomplete = false;
+
+
 
 
 
@@ -43,16 +47,26 @@ public class gameManager : MonoBehaviour
         //Debug.Log("x:" + mousex + " y:" + mousey);
 
 
-        if (walls[0].activeSelf == true )
+        if (walls[0].activeSelf == true && clockcomplete && flowercomplete)
         {
             UIs[1].SetActive(true);
+            switchbuttons[1].SetActive(true);
             sounds[0].GetComponent<AudioSource>().mute = false;
         }
-        else
+        else if (walls[0].activeSelf == true && (!clockcomplete || !flowercomplete))
+        {
+            UIs[1].SetActive(true);
+            switchbuttons[1].SetActive(false);
+            sounds[0].GetComponent<AudioSource>().mute = false;
+        }
+        else if(walls[0].activeSelf == false)
         {
             UIs[1].SetActive(false);
+            
             sounds[0].GetComponent<AudioSource>().mute = true;
         }
+
+
 
         if(walls[1].activeSelf == true || puzzles[1].activeSelf == true)
         {
@@ -63,6 +77,38 @@ public class gameManager : MonoBehaviour
         {
             sounds[1].GetComponent<AudioSource>().mute = true;
         }
+
+
+
+        if(walls[1].activeSelf == true && !radiocomplete)
+        {
+            switchbuttons[1].SetActive(false);
+            switchbuttons[0].SetActive(true);
+        }
+        else if(walls[1].activeSelf == true && radiocomplete)
+        {
+            switchbuttons[1].SetActive(true);
+            switchbuttons[0].SetActive(true);
+        }
+
+
+        if(walls[2].activeSelf == true && !diarycomplete)
+        {
+            switchbuttons[1].SetActive(false);
+            switchbuttons[0].SetActive(true);
+        }
+        else if(walls[2].activeSelf == true && diarycomplete)
+        {
+            switchbuttons[1].SetActive(true);
+            switchbuttons[0].SetActive(true);
+        }
+
+        if(walls[3].activeSelf == true)
+        {
+            switchbuttons[1].SetActive(true);
+            switchbuttons[0].SetActive(true);
+        }
+
         /*
         if (walls[1].activeSelf == true)
         {

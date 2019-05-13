@@ -8,6 +8,7 @@ public class VaseChangeSprites : MonoBehaviour
     public SpriteRenderer sr;
     public Sprite[] vaseSprites;
     public int a;
+    public GameObject GameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,5 +33,6 @@ public class VaseChangeSprites : MonoBehaviour
     public void AddFlower()
     {
         a = 2;
+        GameManager.GetComponent<gameManager>().flowercomplete = true;
     }
 }

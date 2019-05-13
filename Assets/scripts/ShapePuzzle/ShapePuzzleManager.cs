@@ -19,6 +19,7 @@ public class ShapePuzzleManager : MonoBehaviour
     public GameObject ShapePuzzleCompleteSprite;
     public GameObject EnterIcon;
     public GameObject Radio;
+    public GameObject tile;
 
     public Sprite CompleteIcon;
     
@@ -44,6 +45,7 @@ public class ShapePuzzleManager : MonoBehaviour
             EnterIcon.GetComponent<ShapePuzzleChangeSprite>().puzzlefinished = true;
             EnterIcon.GetComponent<MouseOver>().ShapePuzzleComplete = true;
             Radio.GetComponent<MouseOver>().ShapePuzzleComplete = true;
+            tile.SetActive(false);
         }
 
         

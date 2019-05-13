@@ -6,6 +6,7 @@ public class diaryOnClick : MonoBehaviour
 {
     public GameObject Diary;
     public GameObject Wall3;
+    public GameObject gamemanager;
 
     public bool exit;
     // Start is called before the first frame update
@@ -30,6 +31,8 @@ public class diaryOnClick : MonoBehaviour
         {
             Diary.SetActive(true);
             Wall3.SetActive(false);
+            gamemanager.GetComponent<gameManager>().diarycomplete = true;
+
         }
         
 

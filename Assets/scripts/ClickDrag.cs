@@ -27,6 +27,20 @@ public class ClickDrag : MonoBehaviour
     public AudioSource soundeffect;
     public AudioClip closetunlocksound;
 
+    //wall 4
+    public bool torch;
+    public GameObject candle1;
+    public GameObject candle2;
+
+    //paper on desk scene
+    public bool pen;
+    public GameObject paper;
+    public GameObject yes;
+    public GameObject no;
+    public GameObject choices;
+    public bool choiceselected =false;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -86,6 +100,59 @@ public class ClickDrag : MonoBehaviour
                 //transform.position = new Vector3(-4.73f, -4.17f, 0);
             }
         }
+
+        if(torch)
+        {
+            float distance1 = Vector3.Distance(this.gameObject.transform.position, candle1.transform.position);
+            float distance2 = Vector3.Distance(this.gameObject.transform.position, candle2.transform.position);
+            if (distance1 < SnapDistance)
+            {
+                candle1.GetComponent<SpriteRenderer>().enabled = true;
+            }
+            if (distance2 < SnapDistance)
+            {
+                candle2.GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+
+        if(pen)
+        {
+            
+            float distance = Vector3.Distance(this.gameObject.transform.position, paper.transform.position);
+            if (distance < SnapDistance)
+            {
+                paper.GetComponent<ConversationManager>().a = 0;
+            }
+
+            if(choices.activeSelf ==true && choiceselected ==false)
+            {
+                float distancetoyes = Vector3.Distance(this.gameObject.transform.position, new Vector3(1f, -0.08999991f,0f));
+                if (distancetoyes < SnapDistance)
+                {
+                    paper.GetComponent<showgoodtext>().enabled = true;
+                    Debug.Log("yey");
+                    Destroy(yes);
+                    Destroy(no);
+                    choiceselected = true;
+                }
+
+            }
+
+            if(choices.activeSelf == true && choiceselected == false)
+            {
+                float distancetono = Vector3.Distance(this.gameObject.transform.position, new Vector3(-2f, -0.09f,0f));
+                if (distancetono < SnapDistance)
+                {
+                    paper.GetComponent<showbadtext>().enabled = true;
+                    Destroy(yes);
+                    Destroy(no);
+                    choiceselected = true;
+                }
+            }
+
+            
+
+        }
     }
 
     public void OnMouseUp()
@@ -129,6 +196,16 @@ public class ClickDrag : MonoBehaviour
             {
                 transform.position = new Vector3(5.606663f, 0.09828165f, 0f);
             }
+        }
+
+        if(torch)
+        {
+            transform.position = new Vector3(-3.15f, -2.86f, 0f);
+        }
+
+        if(pen)
+        {
+            transform.position = new Vector3(5.437799f, -0.1441277f, 0f);
         }
         
     }

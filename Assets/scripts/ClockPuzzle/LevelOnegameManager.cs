@@ -9,7 +9,7 @@ public class LevelOnegameManager : MonoBehaviour
     public AudioSource audiosource;
     public AudioSource Wall1audiosource;
     public AudioClip audioclip;
-    
+    public GameObject GameManager;
 
     public GameObject Long;
     public GameObject Short;
@@ -35,6 +35,7 @@ public class LevelOnegameManager : MonoBehaviour
                     Wall1audiosource.Play();
                     Wall1audiosource.loop = true;
                     alreadyplayed = true;
+                    GameManager.GetComponent<gameManager>().clockcomplete = true;
                     
                 }
                 
