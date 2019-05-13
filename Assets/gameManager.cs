@@ -209,14 +209,19 @@ public class gameManager : MonoBehaviour
     //Wall3
     public void SafePuzzleEnter()
     {
-
+        walls[2].SetActive(false);
+        puzzles[2].SetActive(true);
+        UIs[0].SetActive(false);
+        puzzlesUIs[2].SetActive(true);
     }
+
 
     public void SafePuzzleExit()
     {
         walls[2].SetActive(true);
         puzzles[2].SetActive(false);
         UIs[0].SetActive(true);
+        puzzlesUIs[2].SetActive(false);
     }
 
 }

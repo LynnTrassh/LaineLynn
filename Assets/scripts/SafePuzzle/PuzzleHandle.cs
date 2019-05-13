@@ -13,6 +13,9 @@ namespace Knight
         
         public AudioClip locked;
         public AudioClip open;
+        
+        public GameObject opencloset;
+
 
         // Start is called before the first frame update
         void Start()
@@ -40,6 +43,10 @@ namespace Knight
             {
                 Debug.Log("Open");
                 audiosource.PlayOneShot(open);
+                opencloset.GetComponent<MouseOver>().safeunclocked = true;
+                
+
+
 
             }
         }

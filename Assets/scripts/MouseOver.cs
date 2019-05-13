@@ -49,11 +49,31 @@ public class MouseOver : MonoBehaviour
 
 
     //wall 3
+    public bool openbigcloset;
+    
+    public bool smallbox;
+    public bool closedsafe;
+    public GameObject ClosedSafe;
+    public GameObject OpenSafe;
+    public GameObject Smallbox;
+    public GameObject key;
+    
+    
 
     //in puzzle
     public bool SafePuzzleExit;
+
+    //changes made
+    public bool bigclosetopen = false;
+    public bool bigclosetunlocked = false;
+    public bool keygot = false;
+    public bool safeopen = false;
+
+    public bool safeunclocked;
+    public bool diaryopen;
     
-    
+
+
 
 
 
@@ -72,7 +92,15 @@ public class MouseOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(safeunclocked)
+        {
+            ClosedSafe.SetActive(false);
+            if (bigclosetopen)
+            {
+                OpenSafe.SetActive(true);
+            }
+            
+        }
     }
 
     public void OnMouseOver()
@@ -157,6 +185,22 @@ public class MouseOver : MonoBehaviour
             Text.text = "";
         }
 
+        if(openbigcloset && !bigclosetopen)
+        {
+            FlavorText.SetActive(true);
+            Text.text = "Closet locked";
+        }
+        else if(openbigcloset && bigclosetopen)
+        {
+            FlavorText.SetActive(false);
+            Text.text = "";
+        }
+        if(closedsafe || OpenSafe || smallbox)
+        {
+            FlavorText.SetActive(false);
+            Text.text = "";
+        }
+
     }
 
     public void OnMouseExit()
@@ -205,7 +249,7 @@ public class MouseOver : MonoBehaviour
             if(!radiosound.isPlaying && ShapePuzzleComplete && pluggedin)
                 {
 
-                    radiosound.PlayOneShot(radionews);
+                    radiosound.PlayOneShot(radionews,3.5f);
                     
                 }
 
@@ -216,6 +260,57 @@ public class MouseOver : MonoBehaviour
             gameManager.SendMessage("SafePuzzleExit");
         }
 
+        if(openbigcloset)
+        {
+            if(!bigclosetopen && bigclosetunlocked)
+            {
+                FlavorText.SetActive(false);
+                Text.text = "";
+                this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                bigclosetopen = true;
+                if (!safeunclocked)
+                {
+                    ClosedSafe.SetActive(true);
+                    OpenSafe.SetActive(false);
+                }
+                else
+                {
+                    ClosedSafe.SetActive(false);
+                    OpenSafe.SetActive(true);
+                }
+                
+            }
+            else if(bigclosetopen && bigclosetunlocked)
+            {
+                this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                bigclosetopen = false;
+
+                ClosedSafe.SetActive(false);
+                OpenSafe.SetActive(false);
+            }
+            
+        }
+        if(closedsafe && !safeopen)
+        {
+            gameManager.SendMessage("SafePuzzleEnter");
+            Debug.Log("clicking");
+        }
+        if(ClosedSafe && safeunclocked)
+        {
+            ClosedSafe.SetActive(false);
+            //OpenSafe.SetActive(true);
+        }
+
+        if(smallbox)
+        {
+            if(Smallbox.GetComponent<SpriteRenderer>().enabled == false)
+            {
+                Smallbox.GetComponent<SpriteRenderer>().enabled = true;
+                key.SetActive(true);
+            }
+            
+            
+        }
         
         
     }

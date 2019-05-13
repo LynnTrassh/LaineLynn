@@ -20,7 +20,12 @@ public class ClickDrag : MonoBehaviour
     public GameObject smallcloset;
 
     public float SnapDistance;
-    
+
+    //wall 3
+    public bool key;
+    public GameObject BigCloset;
+    public AudioSource soundeffect;
+    public AudioClip closetunlocksound;
 
 
     // Start is called before the first frame update
@@ -109,6 +114,21 @@ public class ClickDrag : MonoBehaviour
                 }
             }
             
+        }
+        if(key)
+        {
+            float distance = Vector3.Distance(this.gameObject.transform.position, BigCloset.transform.position);
+            if (distance < SnapDistance)
+            {
+                Destroy(gameObject);
+                BigCloset.GetComponent<MouseOver>().bigclosetunlocked = true;
+                soundeffect.PlayOneShot(closetunlocksound,2.5f);
+                
+            }
+            else
+            {
+                transform.position = new Vector3(5.606663f, 0.09828165f, 0f);
+            }
         }
         
     }
